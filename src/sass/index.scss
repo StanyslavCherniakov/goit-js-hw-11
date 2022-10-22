@@ -1,2 +1,28 @@
-@import './common';
-@import './example';
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photo-card {
+  flex-basis: calc(100% / 5);
+  margin: 5px;
+}
+
+img {
+  width: 320;
+  height: 220;
+}
+
+.info {
+  display: flex;
+}
+
+// .load-more {
+//   visibility: hidden;
+// }
