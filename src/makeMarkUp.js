@@ -12,7 +12,7 @@ export function makeMarkUp(data, container) {
       }) => `<div class="photo-card">
   <a href = ${largeImageURL}>
   <img src=${webformatURL} alt=${tags} loading="lazy" />
-  
+  </a>
   <div class="info">
     <p class="info-item">
       <b>Likes</b>
@@ -31,7 +31,7 @@ export function makeMarkUp(data, container) {
       ${downloads}
     </p>
   </div>
-  </a>
+  
 </div>`
     )
     .join('');

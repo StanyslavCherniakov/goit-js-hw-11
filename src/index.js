@@ -24,6 +24,12 @@ function onSubmit(e) {
   refs.gallery.innerHTML = '';
   API.getData(val, page).then(data => {
     page = 1;
+    if (data.data.hits.length === 0) {
+      Notiflix.Notify.warning(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      return;
+    }
     Notiflix.Notify.success(`Hooray! We found ${data.data.totalHits} images.`);
     makeMarkUp(data.data.hits, refs.gallery);
     lightbox.refresh();
