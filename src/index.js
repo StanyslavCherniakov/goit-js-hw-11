@@ -45,6 +45,12 @@ const observer = new IntersectionObserver((entries, observer) => {
       page += 1;
       const val = refs.form.elements.searchQuery.value;
       API.getData(val, page).then(data => {
+        if (data.data.hits.length === 0) {
+          Notiflix.Notify.warning(
+            "We're sorry, but you've reached the end of search results."
+          );
+          return;
+        }
         makeMarkUp(data.data.hits, refs.gallery);
         lightbox.refresh();
         observer.observe(refs.gallery.lastElementChild);
