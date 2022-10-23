@@ -15,14 +15,21 @@ body {
 
 .photo-card {
   flex-basis: calc(100% / 5);
+  width: 350;
+  height: 280;
   margin: 5px;
   border-radius: 10px;
 }
 
+a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 img {
   display: block;
-  width: 320;
-  height: 220;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -30,4 +37,5 @@ img {
   background-color: burlywood;
   display: flex;
   padding: 5px;
+  flex-grow: 1;
 }
