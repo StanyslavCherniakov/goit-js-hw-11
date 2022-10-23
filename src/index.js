@@ -7,11 +7,9 @@ const refs = {
   form: document.querySelector('.search-form'),
   input: document.querySelector('input'),
   gallery: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
 };
 
 refs.form.addEventListener('submit', onSubmit);
-refs.loadMoreBtn.addEventListener('click', onLoadMoreClick);
 refs.gallery.addEventListener('click', e => {
   e.preventDefault();
 });
@@ -21,32 +19,23 @@ let page = 1;
 function onSubmit(e) {
   e.preventDefault();
   const val = refs.form.elements.searchQuery.value;
-  refs.loadMoreBtn.hidden = false;
   refs.gallery.innerHTML = '';
   getData(val).then(data => {
     page = 1;
     Notiflix.Notify.success(`Hooray! We found ${data.data.totalHits} images.`);
-    makeMurkUp(data.data.hits);
+    makeMarkUp(data.data.hits);
     lightbox.refresh();
-  });
-}
-
-function onLoadMoreClick() {
-  page += 1;
-  const val = refs.form.elements.searchQuery.value;
-  getData(val).then(data => {
-    return makeMurkUp(data.data.hits);
+    observer.observe(refs.gallery.lastElementChild);
   });
 }
 
 async function getData(data) {
-  const apiData = await axios.get(
+  return (apiData = await axios.get(
     `https://pixabay.com/api/?key=30789438-6b548ae820f8dbd510a71ac78&q=${data}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`
-  );
-  return apiData;
+  ));
 }
 
-function makeMurkUp(data) {
+function makeMarkUp(data) {
   const markUp = data
     .map(
       ({
@@ -87,3 +76,17 @@ function makeMurkUp(data) {
 }
 
 let lightbox = new SimpleLightbox('.gallery a');
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      page += 1;
+      const val = refs.form.elements.searchQuery.value;
+      getData(val).then(data => {
+        makeMarkUp(data.data.hits);
+        lightbox.refresh();
+        observer.observe(refs.gallery.lastElementChild);
+      });
+    }
+  });
+});

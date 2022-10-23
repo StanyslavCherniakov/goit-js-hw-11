@@ -1,3 +1,7 @@
+body {
+  background-color: aquamarine;
+}
+
 .search-form {
   display: flex;
   justify-content: center;
@@ -12,17 +16,18 @@
 .photo-card {
   flex-basis: calc(100% / 5);
   margin: 5px;
+  border-radius: 10px;
 }
 
 img {
+  display: block;
   width: 320;
   height: 220;
+  overflow: hidden;
 }
 
 .info {
+  background-color: burlywood;
   display: flex;
+  padding: 5px;
 }
-
-// .load-more {
-//   visibility: hidden;
-// }
