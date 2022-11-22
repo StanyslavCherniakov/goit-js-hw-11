@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -26,7 +25,7 @@ function onSubmit(e) {
     page = 1;
     if (data.data.hits.length === 0) {
       Notiflix.Notify.warning(
-        'Sorry, there are no images matching your search query. Please try again.'
+        'Sorry, there are no images matching your search query. Please try again.',
       );
       return;
     }
@@ -47,7 +46,7 @@ const observer = new IntersectionObserver((entries, observer) => {
       API.getData(val, page).then(data => {
         if (data.data.hits.length === 0) {
           Notiflix.Notify.warning(
-            "We're sorry, but you've reached the end of search results."
+            'We\'re sorry, but you\'ve reached the end of search results.',
           );
           return;
         }
